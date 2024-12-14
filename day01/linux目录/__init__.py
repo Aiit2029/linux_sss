@@ -480,6 +480,95 @@ diff d f
 
 """
 
+## 修改文件的属组
+"""
+chown
+chown root.root d 修改d文件的属组为root.root
+chown root:root d 修改d文件的属组为root.root
+chown -R root:root a 递归修改a目录下的所有文件的属组为root.root
+chown --reference=b f3  将f3文件的属组修改为b文件的属组
+
+chgrp root b 将b文件的属组修改为root
+chgrp --reference=b f3 将f3文件的属组修改为b文件的属组
+
+
+"""
+
+## 权限
+"""
+
+属主  u   user
+属组  g   group
+其他  o   other
+修改权限 chmod
+chmod u+x f 为f文件的属主添加可执行的权限
+chmod u-x f 为f文件的属主删除可执行的权限
+chmod u=r f 设置f文件的属主的权限为可读的权限
+
+drwxrwxr-x 4 priceless priceless  4096 12月 14 15:30 linux_study
+一共十个  其中第一个是文件的类型  后面9位表示权限
+其中第一个字母：
+- 表示文件
+d directory 目录
+s socket 套接字
+b block 块设备
+c character 字符设备
+| 表示符号链接文件
+后面的9位字母表示权限 每三个一组
+3组
+r 表示 可读
+w 表示 可写
+x 表示 可执行
+- 表示 没有权限
+
+rwx rwx r-x 其中的-表示没有权限 分三个 表示
+第一组 为 属主  属主拥有 读写执行的权限
+第二组 为 属组  属组拥有 读写执行的权限
+第三组 为 其他  其他拥有 读和执行的权限 而没有写的权限
+
+对于文件来说
+    # r 可以使用文本查看工具查看其中的内容
+    # w 可以修改文本中的内容
+    # x 执行 可以直接 ./filename 执行
+    
+对于目录来说
+    # r 可以使用ls等文件查看的命令查看
+    # w 可以创建文件也可以删除文件
+    # x 可以cd进入目录
+文件是否能够删除 取决于目录的权限
+
+r w x 可以使用数字来表示
+有则为1 没有则为0
+rwx 表示 4 2 1
+
+所以 chmod 改变权限 可以写成  
+chmod 777 f  表示给f文件的所有权限
+chmod 755 d  表示给d目录的所有权限
+chmod 600 f  420 000 000 表示给f文件的属主的权限为可读可写
+chmod --reference=b f3 将f3文件的权限修改为b文件的权限
+
+## 设定特殊权限
+
++i  表示文件不可修改 不能删除 不能变更 
++a  表示文件只能追加内容
+
+chattr +i a 为a文件添加不可修改的属性 
+lsattr a 查看a文件的属性
+
+
+
+
+
+"""
+
+## 添加用户
+"""
+useradd u1 添加用户
+passwd u1  为用户 u1 设置密码
+
+"""
+
+
 
 
 
